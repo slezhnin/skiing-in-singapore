@@ -7,6 +7,11 @@ repositories {
     mavenCentral()
 }
 
+test {
+    minHeapSize = '32m'
+    maxHeapSize = '64m'
+}
+
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.4'
     compile 'org.codehaus.gpars:gpars:1.2.1'
