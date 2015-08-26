@@ -17,9 +17,8 @@ class BestRouteCalculator<T extends Number> implements Callable<Route> {
 
     @Override
     Route<T> call() throws Exception {
-        new MapPositionIterator<T>(map).inject(null) { Route<T> route, position ->
-            def nextRoute = new Route<T>(position).calculate()
-            nextRoute > route ? nextRoute : route
+        new RouteIterator<T>(new MapPositionIterator<T>(map)).inject(null) { Route<T> route, next ->
+            next.calculate() > route ? next : route
         } as Route<T>
     }
 
