@@ -22,4 +22,14 @@ class BestRouteCalculator<T extends Number> implements Callable<Route> {
             nextRoute > route ? nextRoute : route
         } as Route<T>
     }
+
+    public static void main(String[] args) {
+        println "BestRouteCaculator is calculating from URL: ${args[0]}"
+        def start = System.currentTimeMillis()
+        new URL(args[0]).withInputStream { stream ->
+            println new BestRouteCalculator<Integer>(IntegerXYArrayDecoder.decode(stream))()
+        }
+        def duration = ((System.currentTimeMillis() - start) / 1000) as Integer
+        println "Duration: $duration seconds"
+    }
 }
