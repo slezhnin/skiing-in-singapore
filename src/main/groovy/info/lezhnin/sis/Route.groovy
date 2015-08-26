@@ -6,7 +6,7 @@ package info.lezhnin.sis
  * @author SBT-Lezhnin-SA
  * @since 2015.08.26
  */
-class Route<T extends Number> implements Comparable<Route> {
+class Route<T extends Number> implements Comparable<Route<T>> {
     private final heights = new LinkedList<T>()
     final MapPosition<T> position
 
@@ -14,17 +14,8 @@ class Route<T extends Number> implements Comparable<Route> {
         this.position = position
     }
 
-    Route leftShift(T height) {
-        addHeight height
-        this
-    }
-
-    void addHeight(T height) {
-        heights << height
-    }
-
     T getElevation() {
-        heights.size() ? heights.first() - heights.last() : 0
+        heights ? heights.first() - heights.last() : 0 as T
     }
 
     int getLength() {
@@ -60,7 +51,7 @@ Route{
     }
 
     @Override
-    int compareTo(Route o) {
+    int compareTo(Route<T> o) {
         if (o == null || length > o.length || (length == o.length && elevation > o.elevation)) return 1
         if (length == o.length && elevation == o.elevation) return 0
         return -1
