@@ -15,6 +15,8 @@ class MapPosition<T> {
         this.map = map
         this.x = x
         this.y = y
+        assert x >= 0 && x < map.length
+        assert y >= 0 && y < map[0].length
     }
 
     T getValue() {
@@ -43,6 +45,6 @@ class MapPosition<T> {
 
     @Override
     public String toString() {
-        "MapPosition{x=$x,y=$y}"
+        "MapPosition{x=$x,y=$y,value=$value}"
     }
 }
